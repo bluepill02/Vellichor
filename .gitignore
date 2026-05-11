@@ -1,0 +1,84 @@
+# WordPress Core Files
+
+wp-admin/
+
+wp-includes/
+
+wp-*.php
+
+xmlrpc.php
+
+readme.html
+
+license.txt
+
+wp-config-sample.php
+
+
+
+# Configuration Files
+
+wp-config.php
+
+.htaccess
+
+
+
+# Uploads and Cache
+
+wp-content/uploads/
+
+wp-content/cache/
+
+wp-content/backup*/
+
+wp-content/upgrade/
+
+wp-content/updraft/
+
+
+
+# Logs
+
+*.log
+
+error_log
+
+debug.log
+
+
+
+# System Files
+
+.DS_Store
+
+Thumbs.db
+
+.env
+
+
+
+# Node modules (if using)
+
+node_modules/
+
+npm-debug.log*
+
+
+
+# Only track custom themes and plugins
+
+wp-content/themes/twentytwenty*/
+
+wp-content/plugins/akismet/
+
+wp-content/plugins/hello.php
+
+
+
+# Keep custom directories
+
+!wp-content/themes/your-custom-theme/
+
+!wp-content/plugins/your-custom-plugin/
+

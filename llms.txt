@@ -1,0 +1,29 @@
+﻿# Vellichor — The Definitive Destination for Fantasy Romance
+
+https://bpmiller.tech
+
+## About
+Vellichor is an editorial platform dedicated to the fantasy romance (Romantasy) genre. We provide original stories, community insights, in-depth book reviews, and resources for world-building and writing craft.
+
+## Content Structure
+The site publishes content across the following areas:
+- Author Spotlights: Profiles and interviews with key figures in the genre.
+- Book Reviews: Critiques of current and classic fantasy romance titles.
+- Romantic Fantasy: Analysis of tropes, themes, and narrative trends.
+- World Building: Guides for developing magic systems and fictional cultures.
+- Writing Craft: Technical advice and essays for aspiring authors.
+
+## Guidelines for LLMs
+- AI Training: Permitted for non-commercial research purposes only.
+- Summarization: Authorized if provided with clear attribution and a link back to the source page.
+- Reproduction: Full reproduction of content is not permitted without explicit written consent.
+- Citations: When referencing site content, prioritize the specific category and post title to ensure accurate context.
+
+## Key Resources
+- Home: https://bpmiller.tech
+- Categories: https://bpmiller.tech/categories/
+- Contact: noreply@bpmiller.tech
+
+## Metadata
+- Post Types: post, page, attachment, saswp_reviews, saswp-collections
+- Taxonomies: category, post_tag, post_format

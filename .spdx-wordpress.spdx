@@ -1,0 +1,123 @@
+{
+    "SPDXID": "SPDXRef-DOCUMENT",
+    "spdxVersion": "SPDX-2.3",
+    "creationInfo": {
+        "created": "2026-02-03T18:26:15Z",
+        "creators": [
+            "Organization: Broadcom Inc. and/or its subsidiaries.",
+            "Tool: Blacksmith-6.52.2"
+        ]
+    },
+    "name": "SPDX document for WordPress 6.9.1",
+    "dataLicense": "CC0-1.0",
+    "documentDescribes": [
+        "SPDXRef-wordpress"
+    ],
+    "documentNamespace": "pkg:bitnami/wordpress@6.9.1-0?arch=amd64&distro=debian-12",
+    "packages": [
+        {
+            "SPDXID": "SPDXRef-wordpress",
+            "name": "wordpress",
+            "versionInfo": "6.9.1-0",
+            "downloadLocation": "https://wordpress.org/wordpress-6.9.1.tar.gz",
+            "licenseConcluded": "GPL-2.0-only",
+            "licenseDeclared": "GPL-2.0-only",
+            "supplier": "Organization: Bitnami",
+            "originator": "Organization: upstream",
+            "primaryPackagePurpose": "LIBRARY",
+            "filesAnalyzed": false,
+            "externalRefs": [
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceType": "cpe23Type",
+                    "referenceLocator": "cpe:2.3:*:wordpress:wordpress:6.9.1:*:*:*:*:*:*:*"
+                },
+                {
+                    "referenceCategory": "PACKAGE-MANAGER",
+                    "referenceType": "purl",
+                    "referenceLocator": "pkg:bitnami/wordpress@6.9.1-0?arch=amd64&distro=debian-12"
+                }
+            ],
+            "copyrightText": "NOASSERTION"
+        },
+        {
+            "name": "twentytwentyfive",
+            "SPDXID": "SPDXRef-Package-eb621910490f00b9",
+            "versionInfo": "1.4.0",
+            "supplier": "Organization: Bitnami",
+            "downloadLocation": "NONE",
+            "filesAnalyzed": true,
+            "packageVerificationCode": {
+                "packageVerificationCodeValue": "8a909da7db7cfd50f28271d91cc3de498ac7a9be"
+            },
+            "licenseConcluded": "GPL-2.0-or-later",
+            "licenseDeclared": "GPL-2.0-or-later",
+            "externalRefs": [
+                {
+                    "referenceCategory": "PACKAGE-MANAGER",
+                    "referenceType": "purl",
+                    "referenceLocator": "pkg:npm/twentytwentyfive@1.4.0"
+                }
+            ],
+            "primaryPackagePurpose": "LIBRARY",
+            "originator": "Organization: upstream",
+            "copyrightText": "NOASSERTION"
+        },
+        {
+            "SPDXID": "SPDXRef-wp-cli",
+            "name": "wp-cli",
+            "versionInfo": "2.12.0",
+            "downloadLocation": "https://github.com/wp-cli/wp-cli/archive/v2.12.0.tar.gz",
+            "licenseConcluded": "MIT",
+            "licenseDeclared": "MIT",
+            "supplier": "Organization: Bitnami",
+            "originator": "Organization: upstream",
+            "primaryPackagePurpose": "LIBRARY",
+            "filesAnalyzed": false,
+            "externalRefs": [
+                {
+                    "referenceCategory": "SECURITY",
+                    "referenceType": "cpe23Type",
+                    "referenceLocator": "cpe:2.3:*:wp-cli:wp-cli:2.12.0:*:*:*:*:*:*:*"
+                },
+                {
+                    "referenceCategory": "PACKAGE-MANAGER",
+                    "referenceType": "purl",
+                    "referenceLocator": "pkg:bitnami/wp-cli@2.12.0?arch=amd64&distro=debian-12"
+                }
+            ],
+            "copyrightText": "NOASSERTION"
+        }
+    ],
+    "files": [
+        {
+            "fileName": "wp-content/themes/twentytwentyfive/package.json",
+            "SPDXID": "SPDXRef-File-6ad995ebcb055273-wordpress",
+            "checksums": [
+                {
+                    "algorithm": "SHA1",
+                    "checksumValue": "08c437ed9cc30943540e93b57ade25ad09d116cb"
+                }
+            ],
+            "copyrightText": ""
+        }
+    ],
+    "hasExtractedLicensingInfos": [],
+    "relationships": [
+        {
+            "spdxElementId": "SPDXRef-wordpress",
+            "relatedSpdxElement": "SPDXRef-Package-eb621910490f00b9",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-Package-eb621910490f00b9",
+            "relatedSpdxElement": "SPDXRef-File-6ad995ebcb055273-wordpress",
+            "relationshipType": "CONTAINS"
+        },
+        {
+            "spdxElementId": "SPDXRef-wordpress",
+            "relationshipType": "CONTAINS",
+            "relatedSpdxElement": "SPDXRef-wp-cli"
+        }
+    ]
+}

@@ -1,0 +1,20 @@
+Sitemap: https://bpmiller.tech/sitemap.xml
+Sitemap: https://bpmiller.tech/sitemap_index.xml
+
+User-agent: *
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Disallow: /wp-includes/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/themes/
+Disallow: /trackback/
+Disallow: /feed/
+Disallow: /comments/
+Disallow: /*/feed/
+Disallow: /*/comment-page-*
+Disallow: /author/
+Disallow: /?s=*
+Disallow: /*?s=*
+Disallow: /saswp-reviews/
+Disallow: /saswp-collections/
+Disallow: /attachment/
