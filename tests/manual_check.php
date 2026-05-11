@@ -19,12 +19,20 @@ if ($returnVar !== 0) {
 }
 
 // 2. Constant Check
-$content = file_get_contents($indexFile);
 $pattern = "/define\(\s*['\"]WP_USE_THEMES['\"]\s*,\s*true\s*\);/";
-if (!preg_match($pattern, $content)) {
-    $errors[] = "WP_USE_THEMES constant not defined correctly in index.php.";
+if (!file_exists($indexFile)) {
+    $errors[] = "Cannot check WP_USE_THEMES constant: index.php does not exist at $indexFile.";
+} elseif (!is_readable($indexFile)) {
+    $errors[] = "Cannot check WP_USE_THEMES constant: index.php is not readable at $indexFile.";
 } else {
-    echo "✓ WP_USE_THEMES constant check passed.\n";
+    $content = file_get_contents($indexFile);
+    if ($content === false) {
+        $errors[] = "Cannot check WP_USE_THEMES constant: failed to read index.php at $indexFile.";
+    } elseif (!preg_match($pattern, $content)) {
+        $errors[] = "WP_USE_THEMES constant not defined correctly in index.php.";
+    } else {
+        echo "✓ WP_USE_THEMES constant check passed.\n";
+    }
 }
 
 if (empty($errors)) {
