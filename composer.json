@@ -1,0 +1,13 @@
+{
+    "name": "vellichor/vellichor",
+    "description": "Vellichor - Fantasy Romance Editorial Platform",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "^10"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
