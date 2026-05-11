@@ -24,7 +24,11 @@ class IndexTest extends TestCase
     public function testWpUseThemesConstantIsDefined(): void
     {
         $indexFile = dirname(__DIR__) . '/index.php';
+        $this->assertFileExists($indexFile, 'index.php does not exist');
+        $this->assertIsReadable($indexFile, 'index.php is not readable');
+
         $content = file_get_contents($indexFile);
+        $this->assertNotFalse($content, 'Could not read contents of index.php');
 
         // Use regex to ensure the constant is defined correctly
         // Matches: define( 'WP_USE_THEMES', true );
