@@ -39,7 +39,11 @@ def update_plugins():
             )
             resp.raise_for_status()
             plugins.extend(resp.json())
-            total_pages = int(resp.headers.get('X-WP-TotalPages', '1'))
+            total_pages_header = resp.headers.get('X-WP-TotalPages', '1')
+            try:
+                total_pages = int(total_pages_header)
+            except ValueError:
+                total_pages = 1
             if page >= total_pages:
                 break
             page += 1
@@ -78,37 +82,34 @@ def audit_rankmath():
         log(f"Failed to fetch RankMath inspection results: {e}")
         return
 
-    if resp.status_code == 200:
-        results = resp.json()
-        rows = results.get('rows', [])
-        for row in rows:
-            if row.get('index_verdict') != 'PASS':
-                page = row.get('page')
-                issue = row.get('coverage_state')
-                log(f"Issue found on {page}: {issue}")
-                if page:
-                    # Format URL properly
-                    if not page.startswith('http'):
-                        url_to_submit = build_url(BASE_SITE_URL, page)
-                    else:
-                        url_to_submit = page
+    results = resp.json()
+    rows = results.get('rows', [])
+    for row in rows:
+        if row.get('index_verdict') != 'PASS':
+            page = row.get('page')
+            issue = row.get('coverage_state')
+            log(f"Issue found on {page}: {issue}")
+            if page:
+                # Format URL properly
+                if not page.startswith('http'):
+                    url_to_submit = build_url(BASE_SITE_URL, page)
+                else:
+                    url_to_submit = page
 
-                    try:
-                        submit_resp = requests.post(
-                            build_url(WP_API_URL, '/rankmath/v1/in/submitUrls'),
-                            headers=headers,
-                            json={"urls": url_to_submit},
-                            auth=auth,
-                            timeout=REQUEST_TIMEOUT
-                        )
-                        if submit_resp.status_code == 200:
-                            log(f"  - Submitted URL {url_to_submit} to IndexNow/RankMath Indexing.")
-                        else:
-                            log(f"  - Failed to submit URL via RankMath: {submit_resp.text}")
-                    except RequestException as e:
-                        log(f"  - Failed to submit URL via RankMath: {e}")
-    else:
-        log("Failed to fetch RankMath inspection results.")
+                try:
+                    submit_resp = requests.post(
+                        build_url(WP_API_URL, '/rankmath/v1/in/submitUrls'),
+                        headers=headers,
+                        json={"urls": url_to_submit},
+                        auth=auth,
+                        timeout=REQUEST_TIMEOUT
+                    )
+                    if submit_resp.status_code == 200:
+                        log(f"  - Submitted URL {url_to_submit} to IndexNow/RankMath Indexing.")
+                    else:
+                        log(f"  - Failed to submit URL via RankMath: {submit_resp.text}")
+                except RequestException as e:
+                    log(f"  - Failed to submit URL via RankMath: {e}")
 
 def audit_sitekit():
     log("Checking Google Site Kit for SEO/health issues...")
@@ -124,20 +125,17 @@ def audit_sitekit():
         log(f"Failed to fetch Site Kit health checks or plugin not fully configured: {e}")
         return
 
-    if resp.status_code == 200:
-        health_data = resp.json()
-        checks = health_data.get('checks') if isinstance(health_data, dict) else None
-        if isinstance(checks, list):
-            status_counts = {}
-            for check in checks:
-                status = check.get('status', 'unknown')
-                status_counts[status] = status_counts.get(status, 0) + 1
-            log(f"Site Kit Health Checks summary: total={len(checks)}, statuses={status_counts}")
-        else:
-            item_count = len(health_data) if hasattr(health_data, '__len__') else 'unknown'
-            log(f"Site Kit Health Checks fetched successfully (items={item_count}).")
+    health_data = resp.json()
+    checks = health_data.get('checks') if isinstance(health_data, dict) else None
+    if isinstance(checks, list):
+        status_counts = {}
+        for check in checks:
+            status = check.get('status', 'unknown')
+            status_counts[status] = status_counts.get(status, 0) + 1
+        log(f"Site Kit Health Checks summary: total={len(checks)}, statuses={status_counts}")
     else:
-        log("Failed to fetch Site Kit health checks or plugin not fully configured.")
+        item_count = len(health_data) if hasattr(health_data, '__len__') else 'unknown'
+        log(f"Site Kit Health Checks fetched successfully (items={item_count}).")
 
 def run_seo_audit():
     log("Running daily SEO audit and applying fixes from discoverers...")
