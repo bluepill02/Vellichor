@@ -22,6 +22,7 @@ def log(msg):
     print(f"[*] {msg}")
 
 def build_url(base, path):
+    """Safely join a base URL with a path segment."""
     return urljoin(base.rstrip('/') + '/', path.lstrip('/'))
 
 def update_plugins():
@@ -133,8 +134,8 @@ def audit_sitekit():
                 status_counts[status] = status_counts.get(status, 0) + 1
             log(f"Site Kit Health Checks summary: total={len(checks)}, statuses={status_counts}")
         else:
-            size_hint = len(health_data) if hasattr(health_data, '__len__') else 'unknown'
-            log(f"Site Kit Health Checks fetched successfully (items={size_hint}).")
+            item_count = len(health_data) if hasattr(health_data, '__len__') else 'unknown'
+            log(f"Site Kit Health Checks fetched successfully (items={item_count}).")
     else:
         log("Failed to fetch Site Kit health checks or plugin not fully configured.")
 
